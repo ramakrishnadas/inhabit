@@ -26,4 +26,17 @@ const samplehabits = [
 
 ]
 
-
+const sampleHabitProgress = [
+  {
+    habit_id: "a604b197-7489-41bd-a2b6-04d27cc3e919",
+    date: ('2025-05-24'),
+    actual_amount: "10",
+    note: "Good start"
+  },
+  {
+    habit_id: "2798e9e1-90d7-45ba-aea5-1933141fe079",
+    date: ('2025-05-24'),
+    actual_amount: "7",
+    note: "Good start"
+  }
+]
