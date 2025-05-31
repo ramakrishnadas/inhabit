@@ -1,6 +1,7 @@
 import pool from '@/app/lib/db';
 import validator from 'validator';
 import { NextResponse } from 'next/server';
+import { hashPassword } from '@/app/lib/utils';
 
 export async function GET(
   request: Request,
@@ -25,7 +26,6 @@ export async function GET(
     return NextResponse.json({ error: 'Error fetching user' }, { status: 500 });
   }
 }
-
 export async function PUT(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
@@ -39,6 +39,7 @@ export async function PUT(
     }
 
     const { name, email, password, image } = await request.json();
+    const hashedPassword = await hashPassword(password);
 
     const result = await pool.query(
       `UPDATE users
@@ -47,7 +48,7 @@ export async function PUT(
            password = $3, 
            image = $4
        WHERE id = $5`,
-      [name, email, password, image, id]
+      [name, email, hashedPassword, image, id]
     );
 
     if (result.rowCount === 0) {
