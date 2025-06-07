@@ -1,24 +1,20 @@
 import React from "react";
 import { Habit } from "../lib/definitions";
-import { useRouter } from "next/navigation";
 
-type LogProgressModalProps<T> = {
+type LogProgressModalProps = {
   visible: boolean;
   onCancel: () => void;
   habit: Habit | null;
 };
 
-export function LogProgressModal<T>({
+export function LogProgressModal({
   visible,
   onCancel,
   habit,
-}: LogProgressModalProps<T>) {
-
-    const router = useRouter();
+}: LogProgressModalProps) {
 
     const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
 
-    const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState<string | null>(null);
     const [success, setSuccess] = React.useState<string | null>(null);
     const [formData, setFormData] = React.useState({
@@ -41,7 +37,6 @@ export function LogProgressModal<T>({
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setLoading(true);
         setError(null);
         setSuccess(null);
 
@@ -75,8 +70,6 @@ export function LogProgressModal<T>({
             } else {
                 setError("There was an unexpected error");
             }
-        } finally {
-            setLoading(false);
         }
     };
 
