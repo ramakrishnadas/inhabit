@@ -49,7 +49,13 @@ export const authOptions = {
       }
       return session;
     },
-    async jwt({ token, user }: { token: JWT, user: { id: string; name: string; email: string; image: string };}) {
+    async jwt({ token, user }: { token: JWT, user: {
+      id: string;
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+      }
+    }) {
       // `user` is only available at login
       if (user) {
         token.sub = user.id; // store the user id in the JWT token
