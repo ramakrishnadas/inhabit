@@ -1,16 +1,28 @@
 import pool from '@/app/lib/db';
 import { NextResponse } from 'next/server';
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/lib/authOptions";
 
 export async function GET() {
   try {
-    const result = await pool.query('SELECT * FROM habits');
+    const session = await getServerSession(authOptions);
+
+    if (!session || !session.user?.id) {
+      console.log("No valid session. Returning 401.");
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    // console.log("User ID:", session.user.id);
+
+    const result = await pool.query(
+      "SELECT * FROM habits WHERE user_id = $1",
+      [session.user.id]
+    );
+
     return NextResponse.json(result.rows);
   } catch (error) {
-    console.error(error);
-    return NextResponse.json(
-      { error: 'Error fetching habits' },
-      { status: 500 }
-    );
+    console.error("API /api/habits error:", error);
+    return NextResponse.json({ error: "Error fetching habits" }, { status: 500 });
   }
 }
 

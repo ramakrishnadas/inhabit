@@ -1,6 +1,8 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
 import pool from '@/app/lib/db';
 import { comparePasswords } from '@/app/lib/utils';
+import { Session } from 'next-auth';
+import { JWT } from 'next-auth/jwt';
 
 export const authOptions = {
   providers: [
@@ -39,6 +41,28 @@ export const authOptions = {
       },
     }),
   ],
+  callbacks: {
+    async session({ session, token }: { session: Session, token: JWT }) {
+      // Attach the user ID to the session
+      if (session.user && token.sub) {
+        session.user.id = token.sub;
+      }
+      return session;
+    },
+    async jwt({ token, user }: { token: JWT, user: {
+      id: string;
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+      }
+    }) {
+      // `user` is only available at login
+      if (user) {
+        token.sub = user.id; // store the user id in the JWT token
+      }
+      return token;
+    },
+  },
   secret: process.env.NEXTAUTH_SECRET,
   session: { strategy: 'jwt' as const },
 };

@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Providers from "./providers";
 import NavBar from "./components/NavBar"; // <-- import NavBar
 
 const geistSans = Geist({
@@ -29,12 +30,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NavBar /> {/* <-- all pages */}
-        <main>{children}</main>
+
+        <Providers>
+          <NavBar /> {/* <-- all pages */}
+          <main>{children}</main>
+        </Providers>
+        
         {/* Footer */}
         <footer className="text-center text-sm py-6 bg-green-100">
           © 2025 Positive Habits. All rights reserved.
         </footer>
+
       </body>
     </html>
   );
