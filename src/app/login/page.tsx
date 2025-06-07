@@ -9,7 +9,7 @@ export default function Login() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await signIn('credentials', { email, password, callbackUrl: '/' });
+    await signIn('credentials', { email, password, callbackUrl: '/dashboard' });
   };
 
   return (

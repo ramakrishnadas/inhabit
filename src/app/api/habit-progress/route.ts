@@ -18,11 +18,13 @@ export async function POST(request: Request) {
   try {
     const { habit_id, date, actual_amount, note } = await request.json();
 
+    const actualAmount = parseFloat(actual_amount);
+
     const result = await pool.query(
       `INSERT INTO habit_progress(habit_id, date, actual_amount, note)
        VALUES ($1, $2, $3, $4)
        RETURNING id`,
-      [habit_id, date, actual_amount, note]
+      [habit_id, date, actualAmount, note]
     );
 
     return NextResponse.json(
