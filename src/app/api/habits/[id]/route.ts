@@ -1,12 +1,21 @@
 import pool from '@/app/lib/db';
 import validator from 'validator';
 import { NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/app/lib/authOptions';
 
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const session = await getServerSession(authOptions);
+
+    if (!session || !session.user?.id) {
+      console.log('No valid session. Returning 401.');
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const { id } = await params;
 
     if (!id || !validator.isUUID(id)) {
@@ -34,6 +43,12 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const session = await getServerSession(authOptions);
+
+    if (!session || !session.user?.id) {
+      console.log('No valid session. Returning 401.');
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
     // Need to add validation
     const { id } = await params;
 
@@ -41,8 +56,8 @@ export async function PUT(
       return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
     }
 
-    const { user_id, name, target_amount, unit, frequency } =
-      await request.json();
+    const user_id = session.user?.id;
+    const { name, target_amount, unit, frequency } = await request.json();
 
     const result = await pool.query(
       `UPDATE habits
@@ -78,6 +93,13 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const session = await getServerSession(authOptions);
+
+    if (!session || !session.user?.id) {
+      console.log('No valid session. Returning 401.');
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const { id } = await params;
 
     if (!id || !validator.isUUID(id)) {
