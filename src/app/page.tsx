@@ -61,10 +61,6 @@ export default function Home() {
         {/*no bottons*/}
       </section>
 
-      {/* Footer */}
-      <footer className="text-center text-sm py-6 bg-green-100">
-        © 2025 Positive Habits. All rights reserved.
-      </footer>
     </div>
   );
 }
