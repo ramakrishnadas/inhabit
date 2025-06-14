@@ -93,7 +93,7 @@ export default function Page() {
 
   return (
     <div className='mx-20 '>
-      {loading || isLoading ? (
+      {loading ? (
         <div className="text-center text-xl py-10">Loading...</div>
       ) : (
         <>
