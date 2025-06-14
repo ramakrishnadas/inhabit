@@ -2,7 +2,7 @@
 
 import LineChartWrapper from '@/app/components/LineChartWrapper';
 import DataTable from "react-data-table-component";
-import { Habit, HabitProgress } from '../lib/definitions';
+import { Habit, ChartRow } from '../lib/definitions';
 import { useQuery } from '@tanstack/react-query';
 import { fetchHabits, fetchHabitProgressByHabitId } from '../lib/helper';
 import { useEffect, useState } from 'react';
@@ -23,15 +23,18 @@ function getCurrentWeekDates() {
   });
 }
 
+
+
 export default function Page() {
   const { data: habits, isLoading } = useQuery({ queryKey: ["habits"], queryFn: fetchHabits });
   const [habitProgressMap, setHabitProgressMap] = useState<Record<string, Record<string, number>>>({});
-  const [chartData, setChartData] = useState<any[]>([]);
+  const [chartData, setChartData] = useState<ChartRow[]>([]);
   const [loading, setLoading] = useState(true);
 
   const weekDates = getCurrentWeekDates();
 
   useEffect(() => {
+    
     async function fetchProgress() {
       if (!habits) return;
       setLoading(true);
@@ -61,8 +64,8 @@ export default function Page() {
       setHabitProgressMap(progressMap);
 
       // ✅ Generate chartData here
-      const chartRows: any[] = weekDates.map(({ name }) => {
-        const row: any = { name };
+      const chartRows: ChartRow[] = weekDates.map(({ name }) => {
+        const row: ChartRow = { name };
         for (const habit of habits) {
           const value = progressMap[habit.id]?.[name] ?? 0;
           row[habit.name] = value;
@@ -75,7 +78,7 @@ export default function Page() {
     }
 
     fetchProgress();
-  }, [habits]);
+  }, [habits, weekDates]);
 
   const columns = [
     { name: 'Habit', selector: (row: Habit) => row.name },
@@ -94,7 +97,7 @@ export default function Page() {
         <div className="text-center text-xl py-10">Loading...</div>
       ) : (
         <>
-          <h2 className='my-10 text-2xl'>This Week's Progress</h2>
+          <h2 className='my-10 text-2xl'>This Week&apos;s Progress</h2>
           <DataTable
             title=""
             columns={columns}

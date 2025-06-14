@@ -24,3 +24,9 @@ export type HabitProgress = {
     actual_amount: number;
     note: string;
 }
+
+export type ChartRow = {
+  name: string;
+} & {
+  [habitName: string]: number | string;
+};

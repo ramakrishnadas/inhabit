@@ -10,9 +10,10 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
+import { ChartRow } from '../lib/definitions';
 
 interface ProgressChartProps {
-  data: any[];
+  data: ChartRow[];
 }
 
 export default function ProgressChart({ data }: ProgressChartProps) {

@@ -41,10 +41,10 @@ export default function HabitsPage() {
 
     const { data: habits, isLoading } = useQuery({ queryKey: ["habits"], queryFn: fetchHabits });
 
-    if (isLoading) {
+    if (isLoading || loading) {
         return (
             <div className="flex items-center justify-center h-screen">
-            <p className="text-lg font-medium">Loading...</p>
+                <p className="text-lg font-medium">Loading...</p>
             </div>
         );
     }
