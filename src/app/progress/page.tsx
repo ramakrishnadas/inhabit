@@ -5,7 +5,7 @@ import DataTable from "react-data-table-component";
 import { Habit, ChartRow } from '../lib/definitions';
 import { useQuery } from '@tanstack/react-query';
 import { fetchHabits, fetchHabitProgressByHabitId } from '../lib/helper';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 
 function getCurrentWeekDates() {
   const today = new Date();
@@ -29,15 +29,13 @@ export default function Page() {
   const { data: habits, isLoading } = useQuery({ queryKey: ["habits"], queryFn: fetchHabits });
   const [habitProgressMap, setHabitProgressMap] = useState<Record<string, Record<string, number>>>({});
   const [chartData, setChartData] = useState<ChartRow[]>([]);
-  const [loading, setLoading] = useState(true);
 
-  const weekDates = getCurrentWeekDates();
+  const weekDates = useMemo(() => getCurrentWeekDates(), []);
 
   useEffect(() => {
     
     async function fetchProgress() {
       if (!habits) return;
-      setLoading(true);
 
       const progressMap: Record<string, Record<string, number>> = {};
 
@@ -74,7 +72,6 @@ export default function Page() {
       });
 
       setChartData(chartRows);
-      setLoading(false);
     }
 
     fetchProgress();
@@ -91,25 +88,26 @@ export default function Page() {
     })),
   ];
 
+  if (isLoading) {
+        return (
+            <div className="flex items-center justify-center h-screen">
+                <p className="text-lg font-medium">Loading...</p>
+            </div>
+        );
+  }
+
   return (
     <div className='mx-20 '>
-      {loading ? (
-        <div className="text-center text-xl py-10">Loading...</div>
-      ) : (
-        <>
-          <h2 className='my-10 text-2xl'>This Week&apos;s Progress</h2>
-          <DataTable
-            title=""
-            columns={columns}
-            data={habits ?? []}
-            className='my-10'
-          />
-          <div>
-            <LineChartWrapper data={chartData}/>
-          </div>
-        </>
-      )}
-      
+      <h2 className='my-10 text-2xl'>This Week&apos;s Progress</h2>
+      <DataTable
+        title=""
+        columns={columns}
+        data={habits ?? []}
+        className='my-10'
+      />
+      <div>
+        <LineChartWrapper data={chartData}/>
+      </div>
     </div>
   );
 }
