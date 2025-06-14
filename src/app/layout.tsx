@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Positive Habits",
+  title: "InHabits",
   description: "Transform your life with small daily actions.",
 };
 
@@ -37,8 +37,8 @@ export default function RootLayout({
         </Providers>
         
         {/* Footer */}
-        <footer className="text-center text-sm py-6 bg-green-100">
-          © 2025 Positive Habits. All rights reserved.
+        <footer className="text-center text-sm py-6 bg-green-100 my-0">
+          © 2025 InHabits. All rights reserved.
         </footer>
 
       </body>

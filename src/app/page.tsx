@@ -22,13 +22,13 @@ export default function Home() {
             href="/login"
             className="px-6 py-3 rounded-full bg-white text-green-700 font-semibold hover:bg-gray-100 transition"
           >
-            Log in
+            Log In
           </a>
           <a
             href="/signup"
             className="px-6 py-3 rounded-full bg-green-700 text-white font-semibold hover:bg-green-800 transition"
           >
-            Sign up
+            Sign Up
           </a>
         </div>
       </section>
