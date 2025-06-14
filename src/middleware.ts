@@ -15,5 +15,5 @@ export async function middleware(req: NextRequest) {
 
 // Apply the middleware only to the paths you want to protect (e.g., home page, etc.)
 export const config = {
-  matcher: ['/dashboard'], // Apply the middleware to the home page, or any other pages you want to protect
+  matcher: ['/dashboard', '/progress'], // Apply the middleware to the home page, or any other pages you want to protect
 };

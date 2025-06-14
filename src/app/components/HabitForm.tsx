@@ -2,15 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-
-type Habit = {
-  id?: number;
-  user_id?: number;
-  name: string;
-  target_amount: number;
-  unit: string;
-  frequency: string;
-};
+import { Habit } from '../lib/definitions';
 
 type HabitFormProps = {
   habit?: Habit | null;
@@ -21,10 +13,10 @@ export default function HabitForm({ habit }: HabitFormProps) {
   const isEdit = !!habit;
 
   const [formData, setFormData] = useState({
-    name: habit?.name,
+    name: habit?.name || "",
     target_amount: habit?.target_amount ?? 0,
-    unit: habit?.unit,
-    frequency: habit?.frequency,
+    unit: habit?.unit || "",
+    frequency: habit?.frequency || "",
   });
 
   const [error, setError] = useState('');
@@ -132,7 +124,7 @@ export default function HabitForm({ habit }: HabitFormProps) {
           </select>
           <button
             type="submit"
-            className="w-full py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200"
+            className="w-full py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200 cursor-pointer"
           >
             {isEdit ? 'Update Habit' : 'Create Habit'}
           </button>

@@ -14,7 +14,7 @@ export async function GET(
     }
 
     const result = await pool.query(
-      'SELECT * FROM habit_progress WHERE id = $1',
+      'SELECT * FROM habit_progress WHERE habit_id = $1',
       [id]
     );
 
@@ -25,7 +25,7 @@ export async function GET(
       );
     }
 
-    return NextResponse.json(result.rows[0]);
+    return NextResponse.json(result.rows);
   } catch (error) {
     console.error(error);
     return NextResponse.json(
