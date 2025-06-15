@@ -2,6 +2,8 @@
 
 Web application that helps create good habits and/or leave bad habits behind, as well as track users' progress.
 
+Video demonstration and code walkthrough: https://youtu.be/dlykO2v-FLE
+
 # Instructions
 
 The web application has been deployed on Vercel. It may be accessed at the following URL: https://inhabit-vpwo.vercel.app/
