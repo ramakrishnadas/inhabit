@@ -1,5 +1,7 @@
 import { Habit, HabitProgress } from "./definitions";
 
+// Helper functions to call API endpoints
+
 export async function fetchHabits(): Promise<Habit[]> {
   const res = await fetch('/api/habits', {
     credentials: 'include',

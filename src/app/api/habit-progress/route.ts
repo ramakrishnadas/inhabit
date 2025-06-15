@@ -2,6 +2,7 @@ import pool from '@/app/lib/db';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
+  // Retrieve all habit_progress data from database
   try {
     const result = await pool.query('SELECT * FROM habit_progress');
     return NextResponse.json(result.rows);
@@ -15,6 +16,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  // Create habit_progress log in database
   try {
     const { habit_id, date, actual_amount, note } = await request.json();
 

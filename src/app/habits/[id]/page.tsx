@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import HabitForm from '@/app/components/HabitForm';
 
+// Edit Habit page
+
 export default function EditHabitPage() {
   const params = useParams();
   const habitId = params.id;

@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import { hashPassword } from '@/app/lib/utils';
 
 export async function GET() {
+  // Get all users
   try {
     const result = await pool.query('SELECT * FROM users');
     return NextResponse.json(result.rows);
@@ -16,6 +17,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  // Create new user
   try {
     const { name, email, password, image } = await request.json();
     const hashedPassword = await hashPassword(password);

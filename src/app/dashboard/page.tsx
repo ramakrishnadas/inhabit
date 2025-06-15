@@ -10,6 +10,8 @@ import FilterComponent from "@/app/components/FilterComponent";
 import { LogProgressModal } from "../components/LogProgressModal";
 import ConfirmationModal from "../components/ConfirmationModal";
 
+// Dashboard that displays list of authenticated user's habits and several CRUD operations 
+
 async function deleteHabit(id: string) {
   await fetch(`/api/habits/${id}`, { method: "DELETE" });
   window.location.reload();

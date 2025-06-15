@@ -1,3 +1,5 @@
+// Type definitions for use in the whole application
+
 export type User = {
     id: string;
     name: string;

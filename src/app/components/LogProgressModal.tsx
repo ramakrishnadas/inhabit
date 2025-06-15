@@ -1,6 +1,8 @@
 import React from "react";
 import { Habit } from "../lib/definitions";
 
+// Modal that allows the authenticated user to log progress for each habit
+
 type LogProgressModalProps = {
   visible: boolean;
   onCancel: () => void;

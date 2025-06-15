@@ -3,6 +3,8 @@
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 
+// LogIn page
+
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

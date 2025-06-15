@@ -4,6 +4,8 @@ import { comparePasswords } from '@/app/lib/utils';
 import { Session } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 
+// Authentication options
+
 export const authOptions = {
   providers: [
     CredentialsProvider({
@@ -58,7 +60,7 @@ export const authOptions = {
     }) {
       // `user` is only available at login
       if (user) {
-        token.sub = user.id; // store the user id in the JWT token
+        token.sub = user.id;
       }
       return token;
     },

@@ -3,7 +3,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
-import NavBar from "./components/NavBar"; // <-- import NavBar
+import NavBar from "./components/NavBar";
+
+// Main layout for entire web application
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,11 +34,10 @@ export default function RootLayout({
       >
 
         <Providers>
-          <NavBar /> {/* <-- all pages */}
+          <NavBar />
           <main>{children}</main>
         </Providers>
-        
-        {/* Footer */}
+
         <footer className="text-center text-sm py-6 bg-green-100 my-0">
           © 2025 InHabits. All rights reserved.
         </footer>

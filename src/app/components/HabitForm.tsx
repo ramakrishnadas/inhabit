@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Habit } from '../lib/definitions';
 
+// Form to create and update habits
+
 type HabitFormProps = {
   habit?: Habit | null;
 };

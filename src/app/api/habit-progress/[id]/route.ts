@@ -6,6 +6,7 @@ export async function GET(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  // Get habit progress data by habit_id
   try {
     const { id } = await params;
 
@@ -39,8 +40,9 @@ export async function PUT(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  // Update habit_progress data by id
   try {
-    // Need to add validation
+    
     const { id } = await params;
 
     if (!id || !validator.isUUID(id)) {
@@ -84,6 +86,7 @@ export async function DELETE(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  // Delete habit_progress data by id
   try {
     const { id } = await params;
 

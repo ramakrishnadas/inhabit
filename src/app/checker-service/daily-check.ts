@@ -2,6 +2,7 @@ import { sendEmail } from '@/app/lib/mailer';
 import pool from '@/app/lib/db';
 
 export default async function handler() {
+  // Email notification handler function
   try {
     const query = `
         SELECT
@@ -50,6 +51,7 @@ export default async function handler() {
       (user) => user.habits.length > 0
     );
 
+    // Create emails for each user and send emails
     for (const user of usersToNotify) {
       const html = `
         <h2>Hello, ${user.name}!</h2>

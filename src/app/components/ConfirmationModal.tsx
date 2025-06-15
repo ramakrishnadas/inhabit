@@ -1,5 +1,7 @@
 import React from "react";
 
+// Confirmation modal used to confirm deletion of habits to prevent accidental deleting
+
 interface ConfirmationModalProps {
   message?: string;
   onConfirm: () => void;

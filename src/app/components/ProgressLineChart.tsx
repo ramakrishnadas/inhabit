@@ -12,6 +12,8 @@ import {
 } from 'recharts';
 import { ChartRow } from '../lib/definitions';
 
+// Line Chart that displays habit progress for the current week
+
 interface ProgressChartProps {
   data: ChartRow[];
 }

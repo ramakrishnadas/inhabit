@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+// Habit filtering logic
+
 const TextField = styled.input`
   height: 32px;
   width: 200px;

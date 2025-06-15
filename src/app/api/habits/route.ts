@@ -4,6 +4,7 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/app/lib/authOptions';
 
 export async function GET() {
+  // Retrieve all habits that belong to the authenticated user
   try {
     const session = await getServerSession(authOptions);
 
@@ -29,6 +30,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  // Create a new habit for the authenticated user
   try {
     const session = await getServerSession(authOptions);
 

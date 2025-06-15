@@ -7,6 +7,8 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchHabits, fetchHabitProgressByHabitId } from '../lib/helper';
 import { useEffect, useState, useMemo } from 'react';
 
+// Habit progress page. It displays a summary and a line chart of current week progress 
+
 function getCurrentWeekDates() {
   const today = new Date();
   const dayOfWeek = today.getDay();
@@ -22,8 +24,6 @@ function getCurrentWeekDates() {
     return { name, date };
   });
 }
-
-
 
 export default function Page() {
   const { data: habits, isLoading } = useQuery({ queryKey: ["habits"], queryFn: fetchHabits });

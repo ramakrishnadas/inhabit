@@ -1,5 +1,7 @@
 import bcrypt from 'bcrypt';
 
+// Password hashing and "dehashing" logic
+
 export async function hashPassword(password: string): Promise<string> {
   try {
     const saltRounds = 10;

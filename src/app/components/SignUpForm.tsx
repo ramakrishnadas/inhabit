@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+// Form that allows new users to create an account
+
 export default function SignUpForm() {
   const router = useRouter();
   const [formData, setFormData] = useState({

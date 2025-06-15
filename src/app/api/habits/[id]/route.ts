@@ -8,6 +8,7 @@ export async function GET(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  // Get habit by id
   try {
     const session = await getServerSession(authOptions);
 
@@ -42,6 +43,7 @@ export async function PUT(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  // Update habit by id
   try {
     const session = await getServerSession(authOptions);
 
@@ -92,6 +94,7 @@ export async function DELETE(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  // Delete habit by id
   try {
     const session = await getServerSession(authOptions);
 
